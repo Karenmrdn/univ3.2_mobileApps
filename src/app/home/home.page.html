@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> {{title}} </ion-title>
+    <ion-buttons slot="secondary">
+      ({{username}})
+      <ion-button routerLink="/login" routerDirection="root">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Cars</ion-label>
+      <ion-button shape="round" fill="outline" color="success" (click)="add()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Add
+      </ion-button>
+    </ion-list-header>
+
+    <app-car
+      *ngIf="showNew"
+      [isNew]="true"
+      (addCar)="addCar($event)"
+      (cancelAddingCar)="showNew=false"
+    ></app-car>
+
+    <div *ngFor="let car of cars; let i = index">
+      <ion-item-sliding>
+        <ion-item-options side="start">
+          <ion-item-option color="primary" (click)="showEdit=i">
+            <ion-icon name="create"></ion-icon>
+            Change
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="delete(car)">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item (click)="showEdit=-1">
+          <ion-icon name="car" slot="start"></ion-icon>
+          <ion-label>{{car.carName}}</ion-label>
+          <ion-note slot="end">{{car.country}}</ion-note>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option
+            color="secondary"
+            [routerLink]="['/models/'+car.carName, {id: car.id}]"
+            routerDirection="forward"
+          >
+            <ion-icon name="reorder-four-outline"></ion-icon>
+            Models
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <app-car *ngIf="showEdit==i" [isNew]="false" [car]="car"></app-car>
+    </div>
+  </ion-list>
+</ion-content>

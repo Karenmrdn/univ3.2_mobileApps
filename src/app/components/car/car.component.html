@@ -1,0 +1,46 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input
+        type="string"
+        [(ngModel)]="car.carName"
+        name="carName"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Country</ion-label>
+      <ion-input
+        type="string"
+        [(ngModel)]="car.country"
+        name="country"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Capitalization</ion-label>
+      <ion-input
+        type="string"
+        [(ngModel)]="car.capitalization"
+        name="capitalization"
+      ></ion-input>
+    </ion-item>
+    <ion-button *ngIf="isNew" color="primary" (click)="addNew()">
+      <ion-icon slot="start" name="add-circle"></ion-icon> Add
+    </ion-button>
+    <ion-button
+      *ngIf="isNew"
+      color="danger"
+      class="ion-float-right"
+      (click)="cancelAdding()"
+    >
+      <ion-icon slot="start" name="close"></ion-icon> Cancel
+    </ion-button>
+    <ion-button  *ngIf="!isNew" color="primary" (click)="saveCar()">
+      <ion-icon  slot="start" name="save"></ion-icon> Save
+    </ion-button>
+  </ion-card-content>
+</ion-card>
