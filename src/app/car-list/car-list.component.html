@@ -1,0 +1,8 @@
+<h5 class="center-align">List of cars</h5>
+<app-new-car></app-new-car>
+<app-car
+  *ngFor="let currentCar of cars; let i = index"
+  [car]="currentCar"
+  [carIndex]="i"
+>
+</app-car>
